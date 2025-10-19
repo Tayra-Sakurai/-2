@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:小遣い帳_2"
         mc:Ignorable="d"
-        Title="SuperWindow" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16">
+        x:Uid="Title" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

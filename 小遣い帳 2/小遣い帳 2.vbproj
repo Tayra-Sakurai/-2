@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net10.0-windows10.0.26100.1</TargetFramework>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
     <RootNamespace>小遣い帳_2</RootNamespace>
     <UseWPF>true</UseWPF>
-    <SupportedOSPlatformVersion>10.0.26100.1</SupportedOSPlatformVersion>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+    <FileVersion></FileVersion>
+    <AssemblyVersion></AssemblyVersion>
+    <ApplicationManifest>My Project\Package.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,13 +34,37 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="Strings\en-GB\Resource1.Designer.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource1.resw</DependentUpon>
+    </Compile>
+    <Compile Update="Strings\ja-JP\Resource1.Designer.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource1.resw</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="gpl-3.0.rtf">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="My Project\Settings.settings">
       <CustomToolNamespace>My</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="Strings\en-GB\Resource1.resw">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.vb</LastGenOutput>
+    </None>
+    <None Update="Strings\ja-JP\Resource1.resw">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
 
