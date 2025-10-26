@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:小遣い帳_2"
-        mc:Ignorable="d" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16" Title="Hello">
-    <Grid>
+        mc:Ignorable="d" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16" Title="ようこそ">
+    <Window.Resources>
+        <CollectionViewSource x:Key="TableContext"/>
+        <local:Table x:Key="SuperTableComponent"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource TableContext}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,8 +25,38 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Target="{Binding ElementName=SuperDate}">
+                    <AccessText>
+                        _Date of event
+                    </AccessText>
+                </Label>
+                <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4"/>
             </Grid>
         </Border>
-        <DataGrid x:Name="SuperDataGrid" Grid.Row="1" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" IsReadOnly="True"/>
+        <DataGrid x:Name="SuperDataGrid"
+                  Grid.Row="1"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="False"
+                  CanUserSortColumns="False"
+                  IsReadOnly="True" ItemsSource="{Binding}"
+                  AutoGenerateColumns="False"
+                  FontSize="14" FontFamily="BIZ UDGothic"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Date, StringFormat={}{0:s}}" Header="Date and Time" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Trade}" Header="Event" Width="Auto"/>
+                <DataGridTextColumn Binding="{Binding Cash, StringFormat={}{0:c}}" Header="Cash Cahnge" Width="*"/>
+                <DataGridTextColumn Binding="{Binding ICOCA}" Header="ICOCA Charge Changed" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Coop}" Header="COOP e-Charge" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

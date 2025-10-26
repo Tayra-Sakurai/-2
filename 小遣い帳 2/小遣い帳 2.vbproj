@@ -5,10 +5,12 @@
     <TargetFramework>net10.0-windows7.0</TargetFramework>
     <RootNamespace>小遣い帳_2</RootNamespace>
     <UseWPF>true</UseWPF>
-    <NeutralLanguage>en-GB</NeutralLanguage>
+    <NeutralLanguage>ja-JP</NeutralLanguage>
     <FileVersion></FileVersion>
     <AssemblyVersion></AssemblyVersion>
     <ApplicationManifest>My Project\Package.manifest</ApplicationManifest>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
