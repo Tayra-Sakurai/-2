@@ -51,6 +51,60 @@ Public Class TableData
         Me.Date = theDate
     End Sub
 
+    ''' <summary>
+    ''' Generates a table row
+    ''' </summary>
+    ''' <returns>
+    ''' (Table)
+    ''' The generated row.
+    ''' </returns>
+    Public Function GenerateRow() As Table
+        ' The row
+        Dim tbl As New Table()
+        With tbl
+            .Id = Me.Id
+            .Trade = Trade
+            .Date = Me.Date
+            .Cash = Cash
+            .Coop = Coop
+            .ICOCA = ICOCA
+        End With
+        Return tbl
+    End Function
+
+    ''' <summary>
+    ''' Enter the data into the TableData.
+    ''' </summary>
+    ''' <param name="table">
+    ''' (Table)
+    ''' The table to insert.
+    ''' </param>
+    Public Sub Insert_Table(table As Table)
+        Me.Date = table.Date
+        Id = table.Id
+        Trade = table.Trade
+        Cash = table.Cash
+        ICOCA = table.ICOCA
+        Coop = table.Coop
+    End Sub
+
+    ''' <summary>
+    ''' Clears the table
+    ''' </summary>
+    Public Sub Clear()
+        Me.Date = Date.Now
+        ' Data to read
+        Dim db As New MyContext()
+        ' Ids
+        Dim IdList As IQueryable(Of Integer) = From t As Table In db.Table
+                                               Select t.Id
+        Id = IdList.ToList().Max() + 1
+        Trade = ""
+        ICOCA = 0D
+        Coop = 0D
+        Cash = 0D
+    End Sub
+
     Public Property [Date] As Date
         Get
             Return dateValue

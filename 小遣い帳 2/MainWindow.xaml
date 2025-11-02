@@ -42,7 +42,7 @@
                         日付 (_D)
                     </AccessText>
                 </Label>
-                <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date}"/>
+                <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP}"/>
                 <Label x:Name="SuperSuperLabel" Target="{Binding ElementName=SuperEvent}" Grid.Row="1">
                     <AccessText x:Name="SuperSuperAccessText">
                         内容 (_E)
@@ -69,7 +69,7 @@
                 <TextBox x:Name="SuperCoop" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Coop}"/>
                 <Button x:Name="SuperEditButton" Grid.Row="5" Grid.Column="2" Content="編集"/>
                 <Button x:Name="SuperCreateButtton" Grid.Row="5" Grid.Column="3">作成</Button>
-                <Button x:Name="SuperDeleteButton" Grid.Row="5" Grid.Column="4">削除</Button>
+                <Button x:Name="SuperDeleteButton" Grid.Row="5" Grid.Column="4">クリア</Button>
             </Grid>
         </Border>
         <DataGrid x:Name="SuperDataGrid"
