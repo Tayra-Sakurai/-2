@@ -4,18 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:小遣い帳_2"
-        mc:Ignorable="d" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16" Title="ようこそ">
+        mc:Ignorable="d" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16" Title="ようこそ" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <CollectionViewSource x:Key="TableContext"/>
-        <local:Table x:Key="SuperTableComponent"/>
+        <CollectionViewSource x:Key="SuperTableContext"/>
+        <local:TableData x:Key="SuperTableData"/>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10,5,10,5"/>
+            <Setter Property="Margin" Value="2,2,2,2"/>
+        </Style>
     </Window.Resources>
-    <Grid DataContext="{StaticResource TableContext}">
+    <Grid x:Name="SuperGrid" DataContext="{StaticResource SuperTableContext}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border x:Name="InputBorder">
-            <Grid>
+        <Border x:Name="SuperInputBorder">
+            <Grid x:Name="SuperSuperGrid" DataContext="{StaticResource SuperTableData}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -32,12 +37,39 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Label Target="{Binding ElementName=SuperDate}">
-                    <AccessText>
-                        _Date of event
+                <Label x:Name="SuperLabel" Target="{Binding ElementName=SuperDate}">
+                    <AccessText x:Name="SuperAccessText">
+                        日付 (_D)
                     </AccessText>
                 </Label>
-                <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4"/>
+                <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date}"/>
+                <Label x:Name="SuperSuperLabel" Target="{Binding ElementName=SuperEvent}" Grid.Row="1">
+                    <AccessText x:Name="SuperSuperAccessText">
+                        内容 (_E)
+                    </AccessText>
+                </Label>
+                <TextBox x:Name="SuperEvent" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Trade}"/>
+                <Label x:Name="SuperSuperSuperLabel" Grid.Row="2" Target="{Binding ElementName=SuperCash}">
+                    <AccessText x:Name="SuperSuperSuperAccessText">
+                        現金変動額 (_C)
+                    </AccessText>
+                </Label>
+                <TextBox x:Name="SuperCash" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Cash}"/>
+                <Label x:Name="SuperSuperSuperSuperLabel" Grid.Row="3" Target="{Binding ElementName=SuperICOCA}">
+                    <AccessText x:Name="SuperSuperSuperSuperAccessText">
+                        ICOCA 残高変動額 (_I)
+                    </AccessText>
+                </Label>
+                <TextBox x:Name="SuperICOCA" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=ICOCA}"/>
+                <Label x:Name="SuperSuperSuperSuperSuperLabel" Grid.Row="4" Target="{Binding ElementName=SuperCoop}" AutomationProperties.AccessKey="">
+                    <AccessText x:Name="SuperSuperSuperSuperSuperAccessText">
+                        生協電子マネー残高変動額 (_O)
+                    </AccessText>
+                </Label>
+                <TextBox x:Name="SuperCoop" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Coop}"/>
+                <Button x:Name="SuperEditButton" Grid.Row="5" Grid.Column="2" Content="編集"/>
+                <Button x:Name="SuperCreateButtton" Grid.Row="5" Grid.Column="3">作成</Button>
+                <Button x:Name="SuperDeleteButton" Grid.Row="5" Grid.Column="4">削除</Button>
             </Grid>
         </Border>
         <DataGrid x:Name="SuperDataGrid"
@@ -52,11 +84,42 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding Date, StringFormat={}{0:s}}" Header="Date and Time" Width="Auto"/>
-                <DataGridTextColumn Binding="{Binding Trade}" Header="Event" Width="Auto"/>
-                <DataGridTextColumn Binding="{Binding Cash, StringFormat={}{0:c}}" Header="Cash Cahnge" Width="*"/>
-                <DataGridTextColumn Binding="{Binding ICOCA}" Header="ICOCA Charge Changed" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Coop}" Header="COOP e-Charge" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Trade}" Header="Event" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Cash}" Header="Cash Cahnge" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding ICOCA}" Header="ICOCA Charge Changed" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding Coop}" Header="COOP e-Charge" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Border x:Name="SuperSuperInputBorder" Grid.Row="2">
+            <Grid x:Name="SuperSuperSuperGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition x:Name="SuperColumnDefinition" Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="SuperSuperSuperSuperSuperSuperLabel" Target="{Binding ElementName=SuperSuperCash}">
+                    <Label.Content>
+                        現金残高
+                    </Label.Content>
+                </Label>
+                <TextBox x:Name="SuperSuperCash" Grid.Column="1" IsReadOnly="True"/>
+                <Label x:Name="SuperSuperSuperSuperSuperSuperSuperLabel" Grid.Row="1" Target="{Binding ElementName=SuperSuperICOCA}">
+                    <Label.Content>
+                        ICOCA 残高
+                    </Label.Content>
+                </Label>
+                <TextBox x:Name="SuperSuperICOCA" Grid.Column="1" Grid.Row="1" IsReadOnly="True"/>
+                <Label x:Name="SuperSuperSuperSuperSuperSuperSuperSuperLabel" Grid.Row="2" Target="{Binding ElementName=SuperSuperCoop}">
+                    <Label.Content>
+                       生協電子マネー残高
+                    </Label.Content>
+                </Label>
+                <TextBox x:Name="SuperSuperCoop" Grid.Row="2" Grid.Column="1" IsReadOnly="True"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

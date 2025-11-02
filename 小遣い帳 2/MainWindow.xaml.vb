@@ -18,7 +18,7 @@ Class MainWindow
         ' Loading the data
         db.Table.Load()
         ' get the source
-        Dim TableViewSource As CollectionViewSource = CType(FindResource("TableContext"), CollectionViewSource)
+        Dim TableViewSource As CollectionViewSource = CType(FindResource("SuperTableContext"), CollectionViewSource)
         TableViewSource.Source = db.Table.Local.ToObservableCollection()
     End Sub
 
@@ -36,5 +36,23 @@ Class MainWindow
     Private Sub Home_Loaded(sender As Object, ByVal e As RoutedEventArgs) Handles SuperWindow.Loaded
         SuperDataGrid.SelectionUnit = DataGridSelectionUnit.FullRow
         SuperDataGrid.Items.SortDescriptions.Add(New SortDescription("Date", ListSortDirection.Descending))
+        Calc_Current_Charge()
+    End Sub
+
+    ''' <summary>
+    ''' Calculates the current charge left.
+    ''' </summary>
+    Private Sub Calc_Current_Charge()
+        ' Charges
+        Dim cash As Decimal
+        Dim icoca As Decimal
+        Dim coop As Decimal
+        ' Calculation
+        For Each t As Table In db.Table.Local
+            cash += t.Cash
+            icoca += t.ICOCA
+            coop += t.Coop
+        Next
+        SuperSuperCash.Text = Format(cash, "C")
     End Sub
 End Class
