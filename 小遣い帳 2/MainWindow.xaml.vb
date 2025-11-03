@@ -135,4 +135,24 @@ Class MainWindow
         db.SaveChanges()
         Calc_Current_Charge()
     End Sub
+
+    ''' <summary>
+    ''' Open date picking window instead of editing directly.
+    ''' </summary>
+    ''' <param name="sender">
+    ''' (Object)
+    ''' The event sender.
+    ''' </param>
+    ''' <param name="e">
+    ''' (RoutedEventArgs)
+    ''' The event arguments.
+    ''' </param>
+    Private Sub SuperDate_GotFocus(sender As Object, e As RoutedEventArgs) Handles SuperDate.GotFocus
+        ' The special window
+        Dim SWindow As New DateTimePicker(Data.Date)
+        If SWindow.ShowDialog() OrElse True Then
+            Data.Date = SWindow.PickedDateAndTime
+            SuperEvent.Focus()
+        End If
+    End Sub
 End Class

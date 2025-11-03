@@ -12,8 +12,14 @@
             <Setter Property="Padding" Value="10,5,10,5"/>
             <Setter Property="Margin" Value="2,2,2,2"/>
         </Style>
+        <Style TargetType="Grid"
+               x:Key="SuperGridStyleSet">
+            <Setter Property="Margin" Value="10,0,10,10"/>
+        </Style>
     </Window.Resources>
-    <Grid x:Name="SuperGrid" DataContext="{StaticResource SuperTableContext}">
+    <Grid x:Name="SuperGrid"
+          DataContext="{StaticResource SuperTableContext}"
+          Style="{StaticResource SuperGridStyleSet}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
