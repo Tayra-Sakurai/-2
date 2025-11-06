@@ -6,13 +6,13 @@
     <RootNamespace>小遣い帳_2</RootNamespace>
     <UseWPF>true</UseWPF>
     <NeutralLanguage>ja-JP</NeutralLanguage>
-    <FileVersion>1.0.0.1</FileVersion>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
     <ApplicationManifest>My Project\Package.manifest</ApplicationManifest>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageLicenseExpression>GPL-3.0-or-later and CC-BY-SA-4.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.0.0</Version>
-    <RepositoryUrl>https://github.com/Tayra-Sakurai/--2</RepositoryUrl>
+    <Version>1.0.1</Version>
+    <RepositoryUrl>https://github.com/Tayra-Sakurai/-2</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>

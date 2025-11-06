@@ -152,7 +152,9 @@ Class MainWindow
         Dim SWindow As New DateTimePicker(Data.Date)
         If SWindow.ShowDialog() OrElse True Then
             Data.Date = SWindow.PickedDateAndTime
-            SuperEvent.Focus()
+            If Not SuperEvent.Focus() Then
+                Keyboard.Focus(SuperEvent)
+            End If
         End If
     End Sub
 End Class
