@@ -61,100 +61,64 @@ Class MainWindow
         SuperSuperCoop.Text = Format(coop, "C")
     End Sub
 
-    Private Sub SuperEditButton_Click(sender As Object, e As RoutedEventArgs) Handles SuperEditButton.Click
-        If SuperDataGrid.SelectedIndex >= 0 Then
-            ' The updated row.
-            Dim TriData As Table = Data.GenerateRow()
-            With SuperDataGrid.SelectedItem
-                .Id = TriData.Id
-                .Trade = TriData.Trade
-                .Cash = TriData.Cash
-                .Date = TriData.Date
-                .Coop = TriData.Coop
-                .ICOCA = TriData.ICOCA
-            End With
-            ' Update the database
-            db.SaveChanges()
-            Calc_Current_Charge()
-        End If
-    End Sub
-
     ''' <summary>
-    ''' Displays new data.
+    ''' Removes the item.
     ''' </summary>
     ''' <param name="sender">
-    ''' (Object)
-    ''' The sender of the event.
-    ''' </param>
-    ''' <param name="e">
-    ''' (SelectionChangedEventArgs)
-    ''' The event arguments.
-    ''' </param>
-    Private Sub SuperDataGrid_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles SuperDataGrid.SelectionChanged
-        If (SuperDataGrid.SelectedItem IsNot Nothing) AndAlso (Data IsNot Nothing) Then
-            ' The selected row.
-            ' Insert to the border.
-            Data.Insert_Table(SuperDataGrid.SelectedItem)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' Switches to new row mode.
-    ''' </summary>
-    ''' <param name="sender">
-    ''' (Object)
+    ''' (<see cref="Object"/>)
     ''' The event sender.
     ''' </param>
     ''' <param name="e">
-    ''' (RoutedEventArgs)
+    ''' (<see cref="RoutedEventArgs"/>)
     ''' The event arguments.
     ''' </param>
-    Private Sub SuperDeleteButton_Click(sender As Object, e As RoutedEventArgs) Handles SuperDeleteButton.Click
-        ' Remove the selection
-        SuperDataGrid.SelectedIndex = -1
-        Data.Clear()
-    End Sub
-
-    ''' <summary>
-    ''' Adds new data.
-    ''' This is the only entry sub.
-    ''' </summary>
-    ''' <param name="sender">
-    ''' (Object)
-    ''' The sender of this event.
-    ''' </param>
-    ''' <param name="e">
-    ''' (RoutedEventArgs)
-    ''' The event arguments.
-    ''' </param>
-    Private Sub SuperCreateButtton_Click(sender As Object, e As RoutedEventArgs) Handles SuperCreateButtton.Click
-        ' The new row
-        Dim NewRow As Table = Data.GenerateRow()
-        ' Add the data
-        db.Table.Local.Add(NewRow)
+    Private Sub SuperEditButton_Click(sender As Object, e As RoutedEventArgs)
+        db.Table.Local.Remove(SuperDataGrid.SelectedItem)
         db.SaveChanges()
-        Calc_Current_Charge()
     End Sub
 
     ''' <summary>
-    ''' Open date picking window instead of editing directly.
+    ''' The data clear.
     ''' </summary>
     ''' <param name="sender">
-    ''' (Object)
+    ''' (<see cref="Object"/>)
     ''' The event sender.
     ''' </param>
     ''' <param name="e">
-    ''' (RoutedEventArgs)
+    ''' (<see cref="RoutedEventArgs"/>)
     ''' The event arguments.
     ''' </param>
-    Private Sub SuperDate_GotFocus(sender As Object, e As RoutedEventArgs) Handles SuperDate.GotFocus
-        ' The special window
-        Dim SWindow As New DateTimePicker(Data.Date)
-        If SWindow.ShowDialog() OrElse True Then
-            Data.Date = SWindow.PickedDateAndTime
-            If Not SuperEvent.Focus() Then
-                Keyboard.Focus(SuperEvent)
+    Private Sub SuperDeleteButton_Click(sender As Object, e As RoutedEventArgs)
+        ' The largest index number
+        Dim largesti As Integer = 0
+        ' The data.
+        For Each data As Table In db.Table.Local
+            If data.Id > largesti Then
+                ' Set to the largest.
+                largesti = data.Id
             End If
-        End If
+        Next
+        ' New index
+        Dim Nindex As Integer = largesti + 1
+        ' New item's date
+        Dim NDate As Date = Now
+        ' The change of cash.
+        Dim NCash As Decimal = 0
+        ' The ICOCA value change
+        Dim NICOCA As Decimal = 0
+        ' The new coop change value.
+        Dim NCoop As Decimal = 0
+        ' Create the data.
+        Dim NTable As New Table()
+        With NTable
+            .Id = Nindex
+            .Date = NDate
+            .Trade = String.Empty
+            .Cash = NCash
+            .Coop = NCoop
+            .ICOCA = NICOCA
+        End With
+        db.Table.Local.Add(NTable)
+        SuperDataGrid.SelectedItem = NTable
     End Sub
 End Class

@@ -16,6 +16,61 @@
                x:Key="SuperGridStyleSet">
             <Setter Property="Margin" Value="10,0,10,10"/>
         </Style>
+        <DataTemplate x:Key="SuperDataTemplate">
+            <Border x:Name="SuperInputBorder">
+                <Grid x:Name="SuperSuperGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="SuperLabel" Target="{Binding ElementName=SuperDate}">
+                        <AccessText x:Name="SuperAccessText">
+                            日付 (_D)
+                        </AccessText>
+                    </Label>
+                    <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP}"/>
+                    <Label x:Name="SuperSuperLabel" Target="{Binding ElementName=SuperEvent}" Grid.Row="1">
+                        <AccessText x:Name="SuperSuperAccessText">
+                            内容 (_E)
+                        </AccessText>
+                    </Label>
+                    <TextBox x:Name="SuperEvent" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Trade}"/>
+                    <Label x:Name="SuperSuperSuperLabel" Grid.Row="2" Target="{Binding ElementName=SuperCash}">
+                        <AccessText x:Name="SuperSuperSuperAccessText">
+                            現金変動額 (_C)
+                        </AccessText>
+                    </Label>
+                    <TextBox x:Name="SuperCash" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Cash}"/>
+                    <Label x:Name="SuperSuperSuperSuperLabel" Grid.Row="3" Target="{Binding ElementName=SuperICOCA}">
+                        <AccessText x:Name="SuperSuperSuperSuperAccessText">
+                            ICOCA 残高変動額 (_I)
+                        </AccessText>
+                    </Label>
+                    <TextBox x:Name="SuperICOCA" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=ICOCA}"/>
+                    <Label x:Name="SuperSuperSuperSuperSuperLabel" Grid.Row="4" Target="{Binding ElementName=SuperCoop}">
+                        <AccessText x:Name="SuperSuperSuperSuperSuperAccessText">
+                            生協電子マネー残高変動額 (_O)
+                        </AccessText>
+                    </Label>
+                    <TextBox x:Name="SuperCoop" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Coop}"/>
+                    <Button x:Name="SuperEditButton" Grid.Row="5" Grid.Column="2" Content="削除" Click="SuperEditButton_Click"/>
+                    <Button x:Name="SuperCreateButtton" Grid.Row="5" Grid.Column="3">作成</Button>
+                    <Button x:Name="SuperDeleteButton" Grid.Row="5" Grid.Column="4" Click="SuperDeleteButton_Click">クリア</Button>
+                </Grid>
+            </Border>
+        </DataTemplate>
     </Window.Resources>
     <Grid x:Name="SuperGrid"
           DataContext="{StaticResource SuperTableContext}"
@@ -25,59 +80,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border x:Name="SuperInputBorder">
-            <Grid x:Name="SuperSuperGrid" DataContext="{StaticResource SuperTableData}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="SuperLabel" Target="{Binding ElementName=SuperDate}">
-                    <AccessText x:Name="SuperAccessText">
-                        日付 (_D)
-                    </AccessText>
-                </Label>
-                <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP}"/>
-                <Label x:Name="SuperSuperLabel" Target="{Binding ElementName=SuperEvent}" Grid.Row="1">
-                    <AccessText x:Name="SuperSuperAccessText">
-                        内容 (_E)
-                    </AccessText>
-                </Label>
-                <TextBox x:Name="SuperEvent" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Trade}"/>
-                <Label x:Name="SuperSuperSuperLabel" Grid.Row="2" Target="{Binding ElementName=SuperCash}">
-                    <AccessText x:Name="SuperSuperSuperAccessText">
-                        現金変動額 (_C)
-                    </AccessText>
-                </Label>
-                <TextBox x:Name="SuperCash" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Cash}"/>
-                <Label x:Name="SuperSuperSuperSuperLabel" Grid.Row="3" Target="{Binding ElementName=SuperICOCA}">
-                    <AccessText x:Name="SuperSuperSuperSuperAccessText">
-                        ICOCA 残高変動額 (_I)
-                    </AccessText>
-                </Label>
-                <TextBox x:Name="SuperICOCA" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=ICOCA}"/>
-                <Label x:Name="SuperSuperSuperSuperSuperLabel" Grid.Row="4" Target="{Binding ElementName=SuperCoop}" AutomationProperties.AccessKey="">
-                    <AccessText x:Name="SuperSuperSuperSuperSuperAccessText">
-                        生協電子マネー残高変動額 (_O)
-                    </AccessText>
-                </Label>
-                <TextBox x:Name="SuperCoop" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Coop}"/>
-                <Button x:Name="SuperEditButton" Grid.Row="5" Grid.Column="2" Content="編集"/>
-                <Button x:Name="SuperCreateButtton" Grid.Row="5" Grid.Column="3">作成</Button>
-                <Button x:Name="SuperDeleteButton" Grid.Row="5" Grid.Column="4">クリア</Button>
-            </Grid>
-        </Border>
+        <ContentControl x:Name="SuperContentControl" Content="{Binding}"
+                        ContentTemplate="{StaticResource SuperDataTemplate}"/>
         <DataGrid x:Name="SuperDataGrid"
                   Grid.Row="1"
                   CanUserReorderColumns="False"
