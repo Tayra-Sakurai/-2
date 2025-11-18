@@ -7,8 +7,6 @@ Class MainWindow
     ''' </summary>
     Dim db As New MyContext()
 
-    Private Data As TableData
-
     ''' <summary>
     ''' Basic Initializations before loading the window
     ''' </summary>
@@ -22,7 +20,6 @@ Class MainWindow
         ' get the source
         Dim TableViewSource As CollectionViewSource = CType(FindResource("SuperTableContext"), CollectionViewSource)
         TableViewSource.Source = db.Table.Local.ToObservableCollection()
-        Data = CType(FindResource("SuperTableData"), TableData)
     End Sub
 
     ''' <summary>
@@ -78,6 +75,27 @@ Class MainWindow
     End Sub
 
     ''' <summary>
+    ''' Finds the largest index of the database.
+    ''' </summary>
+    ''' <returns>
+    ''' The <see cref="Integer"/> of the largest index.
+    ''' </returns>
+    Private Function Find_Largest_Index() As Integer
+        ' The returning value.
+        ' Since there is no data with the index of 0,
+        ' This has to be changed.
+        Dim largesti As Integer = 0
+        ' The table data.
+        For Each Data As Table In db.Table.Local
+            If largesti < Data.Id Then
+                ' Update largesti if the index is the largest.
+                largesti = Data.Id
+            End If
+        Next
+        Return largesti
+    End Function
+
+    ''' <summary>
     ''' The data clear.
     ''' </summary>
     ''' <param name="sender">
@@ -90,14 +108,7 @@ Class MainWindow
     ''' </param>
     Private Sub SuperDeleteButton_Click(sender As Object, e As RoutedEventArgs)
         ' The largest index number
-        Dim largesti As Integer = 0
-        ' The data.
-        For Each data As Table In db.Table.Local
-            If data.Id > largesti Then
-                ' Set to the largest.
-                largesti = data.Id
-            End If
-        Next
+        Dim largesti As Integer = Find_Largest_Index()
         ' New index
         Dim Nindex As Integer = largesti + 1
         ' New item's date
@@ -120,5 +131,26 @@ Class MainWindow
         End With
         db.Table.Local.Add(NTable)
         SuperDataGrid.SelectedItem = NTable
+    End Sub
+
+    ''' <summary>
+    ''' Create a new row with the entered data.
+    ''' </summary>
+    ''' <param name="sender">
+    ''' (<see cref="Object"/>)
+    ''' The event sender.
+    ''' </param>
+    ''' <param name="e">
+    ''' (<see cref="RoutedEventArgs"/>)
+    ''' The event Arguments.
+    ''' </param>
+    Private Sub SuperCreateButton_Click(sender As Object, e As RoutedEventArgs)
+        db.SaveChanges()
+
+        ' This forces to display latest data
+        SuperDataGrid.Items.Refresh()
+        SuperDataGrid.Items.SortDescriptions.Add(New SortDescription("Date", ListSortDirection.Descending))
+        ' Recalculate
+        Calc_Current_Charge()
     End Sub
 End Class

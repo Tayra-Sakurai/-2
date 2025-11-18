@@ -5,7 +5,10 @@ Public Class MyContext
     ''' <summary>
     ''' Data
     ''' </summary>
-    ''' <returns></returns>
+    ''' <returns>
+    ''' A <see cref="DbSet"/> of <see cref="小遣い帳_2.Table"/>
+    ''' which represents the data.
+    ''' </returns>
     Public Property Table() As DbSet(Of Table)
 
     Protected Overrides Sub OnConfiguring(optionsBuilder As DbContextOptionsBuilder)

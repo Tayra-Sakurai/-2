@@ -7,7 +7,6 @@
         mc:Ignorable="d" Height="500" Width="900" FontFamily="BIZ UDPGothic" FontSize="16" Title="ようこそ" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <CollectionViewSource x:Key="SuperTableContext"/>
-        <local:TableData x:Key="SuperTableData"/>
         <Style TargetType="Button">
             <Setter Property="Padding" Value="10,5,10,5"/>
             <Setter Property="Margin" Value="2,2,2,2"/>
@@ -40,33 +39,33 @@
                             日付 (_D)
                         </AccessText>
                     </Label>
-                    <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP}"/>
+                    <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP, Mode=TwoWay}"/>
                     <Label x:Name="SuperSuperLabel" Target="{Binding ElementName=SuperEvent}" Grid.Row="1">
                         <AccessText x:Name="SuperSuperAccessText">
                             内容 (_E)
                         </AccessText>
                     </Label>
-                    <TextBox x:Name="SuperEvent" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Trade}"/>
+                    <TextBox x:Name="SuperEvent" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Trade, Mode=TwoWay}"/>
                     <Label x:Name="SuperSuperSuperLabel" Grid.Row="2" Target="{Binding ElementName=SuperCash}">
                         <AccessText x:Name="SuperSuperSuperAccessText">
                             現金変動額 (_C)
                         </AccessText>
                     </Label>
-                    <TextBox x:Name="SuperCash" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Cash}"/>
+                    <TextBox x:Name="SuperCash" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Cash, Mode=TwoWay}"/>
                     <Label x:Name="SuperSuperSuperSuperLabel" Grid.Row="3" Target="{Binding ElementName=SuperICOCA}">
                         <AccessText x:Name="SuperSuperSuperSuperAccessText">
                             ICOCA 残高変動額 (_I)
                         </AccessText>
                     </Label>
-                    <TextBox x:Name="SuperICOCA" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=ICOCA}"/>
+                    <TextBox x:Name="SuperICOCA" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=ICOCA, Mode=TwoWay}"/>
                     <Label x:Name="SuperSuperSuperSuperSuperLabel" Grid.Row="4" Target="{Binding ElementName=SuperCoop}">
                         <AccessText x:Name="SuperSuperSuperSuperSuperAccessText">
                             生協電子マネー残高変動額 (_O)
                         </AccessText>
                     </Label>
-                    <TextBox x:Name="SuperCoop" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Coop}"/>
+                    <TextBox x:Name="SuperCoop" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Coop, Mode=TwoWay}"/>
                     <Button x:Name="SuperEditButton" Grid.Row="5" Grid.Column="2" Content="削除" Click="SuperEditButton_Click"/>
-                    <Button x:Name="SuperCreateButtton" Grid.Row="5" Grid.Column="3">作成</Button>
+                    <Button x:Name="SuperCreateButtton" Grid.Row="5" Grid.Column="3" Click="SuperCreateButton_Click">変更を保存</Button>
                     <Button x:Name="SuperDeleteButton" Grid.Row="5" Grid.Column="4" Click="SuperDeleteButton_Click">クリア</Button>
                 </Grid>
             </Border>
@@ -95,7 +94,7 @@
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding Date, StringFormat={}{0:s}}" Header="Date and Time" Width="Auto"/>
                 <DataGridTextColumn Binding="{Binding Trade}" Header="Event" Width="*"/>
-                <DataGridTextColumn Binding="{Binding Cash}" Header="Cash Cahnge" Width="SizeToHeader"/>
+                <DataGridTextColumn Binding="{Binding Cash}" Header="Cash Change" Width="SizeToHeader"/>
                 <DataGridTextColumn Binding="{Binding ICOCA}" Header="ICOCA Charge Changed" Width="SizeToHeader"/>
                 <DataGridTextColumn Binding="{Binding Coop}" Header="COOP e-Charge" Width="SizeToHeader"/>
             </DataGrid.Columns>
