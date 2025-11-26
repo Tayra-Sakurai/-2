@@ -34,8 +34,17 @@ Public Class SuperDateTimePicked
     ''' </summary>
     Private _Second As Integer
 
+    ''' <inheritdoc cref="PropertyChangedEventHandler"/>
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
+    ''' <summary>
+    ''' Raises a <see cref="PropertyChanged"/> event.
+    ''' </summary>
+    ''' <param name="propertyName">
+    ''' (<see cref="String"/>)
+    ''' The <see cref="String"/> value of
+    ''' the name of the property which is changed.
+    ''' </param>
     Private Sub NotifyPropertyChanged(<CallerMemberName()> Optional propertyName As String = Nothing)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propertyName))
     End Sub

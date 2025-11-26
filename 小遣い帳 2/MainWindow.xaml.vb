@@ -153,4 +153,27 @@ Class MainWindow
         ' Recalculate
         Calc_Current_Charge()
     End Sub
+
+    ''' <summary>
+    ''' The datepicker click function.
+    ''' </summary>
+    ''' <param name="sender">
+    ''' (<see cref="Object"/>)
+    ''' The <see cref="Object"/> which sent the event.
+    ''' </param>
+    ''' <param name="e">
+    ''' The <see cref="RoutedEventArgs"/> of the event.
+    ''' </param>
+    Sub SuperDate_Click(sender As Object, e As RoutedEventArgs)
+        ' The value.
+        Dim DVal As Date = SuperDataGrid.SelectedItem.Date
+        ' The Dialog box.
+        ' This will be the input.
+        Dim dialog As New DateTimePicker(DVal)
+        ' Check the value.
+        If dialog.ShowDialog() OrElse True Then
+            ' Change the date and time.
+            SuperDataGrid.SelectedItem.Date = dialog.PickedDateAndTime
+        End If
+    End Sub
 End Class
