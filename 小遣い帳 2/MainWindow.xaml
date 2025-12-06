@@ -39,7 +39,7 @@
                             日付 (_D)
                         </AccessText>
                     </Label>
-                    <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP, Mode=TwoWay}" GotFocus="SuperDate_Click"/>
+                    <TextBox x:Name="SuperDate" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding Path=Date, ConverterCulture=ja-JP, Mode=TwoWay}"/>
                     <Label x:Name="SuperSuperLabel" Target="{Binding ElementName=SuperEvent}" Grid.Row="1">
                         <AccessText x:Name="SuperSuperAccessText">
                             内容 (_E)
